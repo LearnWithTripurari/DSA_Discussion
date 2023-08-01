@@ -33,6 +33,10 @@ public class SinglyLinkedList {
         insertNode(2);
         insertNode(3);
 
+
+        insertAtIndex(1,4);
+
+
         // Traversing
         Node temp = head;
 
@@ -58,6 +62,34 @@ public class SinglyLinkedList {
         }
 
         lastNode.next = newNode;
+    }
+
+    public static void insertAtIndex(int index, int data) {
+
+        Node newNode = new Node(data);
+
+        if(index == 0) {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+
+        Node currentNode = head;
+        int currentIndex = 0;
+
+        while (currentNode != null && currentIndex < index - 1) {
+            currentNode = currentNode.next;
+            currentIndex++;
+        }
+
+        if (currentNode == null) {
+            System.out.println("Invalid index");
+            return;
+        }
+
+        newNode.next = currentNode.next;
+        currentNode.next = newNode;
+
     }
 
 }
