@@ -36,6 +36,8 @@ public class SinglyLinkedList {
 
         insertAtIndex(1,4);
 
+        deleteAtIndex(3);
+
 
         // Traversing
         Node temp = head;
@@ -91,5 +93,41 @@ public class SinglyLinkedList {
         currentNode.next = newNode;
 
     }
+
+    public static void deleteAtIndex(int index) {
+
+        if(head == null) {
+            System.out.println("List is empty!");
+           return;
+        }
+
+        if (index == 0) {
+            head = head.next;
+            return;
+        }
+
+        Node currentNode = head;
+        Node previousNode = null;
+
+        int currentIndex = 0;
+
+        while (currentNode != null && currentIndex < index) {
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+            currentIndex++;
+        }
+
+        if(currentNode == null) {
+            System.out.println("Invalid index");
+            return;
+        }
+        if (previousNode == null) {
+            System.out.println("Previous Node can not be null");
+            return;
+        }
+
+        previousNode.next = currentNode.next;
+    }
+
 
 }
