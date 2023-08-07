@@ -35,8 +35,8 @@ public class SinglyLinkedList {
 
 
         insertAtIndex(1,4);
-
-        deleteAtIndex(3);
+//
+//        deleteAtIndex(3);
 
 
         // Traversing
@@ -46,6 +46,35 @@ public class SinglyLinkedList {
             System.out.println(temp.data);
             temp = temp.next;
         }
+
+        System.out.println("-------------------------- Length of the Linked List -----------------------------");
+
+
+        int listLen = getLength();
+        System.out.println("Length " +listLen);
+
+
+//        System.out.println("--------------------------Reversed element of the Linked List -----------------------------");
+//
+//        // Reverse the Linked List
+//        Node reverseListHead = reverseList();
+//
+//        Node reverseListHeadTemp = reverseListHead;
+//
+//        while (reverseListHeadTemp != null) {
+//            System.out.println(reverseListHeadTemp.data);
+//            reverseListHeadTemp = reverseListHeadTemp.next;
+//        }
+
+        System.out.println("------------------------ Middle Element of the Linked List --------------------------------");
+
+       Node middleNode = findMiddle();
+
+       if(middleNode != null) {
+           System.out.println(middleNode.data);
+       }
+
+
     }
 
 
@@ -127,6 +156,50 @@ public class SinglyLinkedList {
         }
 
         previousNode.next = currentNode.next;
+    }
+
+    public static Node reverseList() {
+
+        Node previousNode = null;
+        Node currentNode = head;
+
+        while (currentNode != null) {
+           Node temp = currentNode.next;
+           currentNode.next = previousNode;
+           previousNode = currentNode;
+           currentNode = temp;
+        }
+
+        return previousNode;
+    }
+
+    public static Node findMiddle() {
+
+        int mid = (int) Math.ceil(getLength() / 2);
+
+        int len =  getLength() % 2 == 0 ? mid + 1 : mid;
+
+        Node currentNode = head;
+
+        while (currentNode != null && len > 1) {
+            len--;
+            currentNode = currentNode.next;
+        }
+
+        return currentNode;
+    }
+
+    public static int getLength() {
+        int length = 0;
+
+        Node currentNode = head;
+
+        while (currentNode != null) {
+            length++;
+            currentNode = currentNode.next;
+        }
+
+        return length;
     }
 
 
