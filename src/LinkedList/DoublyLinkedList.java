@@ -20,28 +20,33 @@ public class DoublyLinkedList {
 
 
         insertAtIndex(6, 0);
-         insertEnd(1);
-         insertEnd(2);
-         insertEnd(3);
+        traverse();
 
-         insertAtIndex(4,2);
-         insertAtIndex(5, 0);
+        insertEnd(1);
+        traverse();
 
-         Node temp = head;
+        insertEnd(2);
+        traverse();
 
-         while (temp != null) {
-             System.out.println(temp.data);
-             temp = temp.next;
-         }
+        insertEnd(3);
+        traverse();
 
-        System.out.println("    // Tail");
 
-        Node tailTemp = tail;
+        insertAtIndex(4,2);
+        traverse();
 
-         while (tailTemp != null) {
-             System.out.println(tailTemp.data);
-             tailTemp = tailTemp.prev;
-         }
+        insertAtIndex(5, 0);
+        traverse();
+
+
+        deleteAtIndex(0);
+        traverse();
+
+        deleteAtIndex(3);
+        traverse();
+
+        deleteAtIndex(3);
+        traverse();
 
 
     }
@@ -113,6 +118,55 @@ public class DoublyLinkedList {
 
         }
 
+    }
+
+    static void deleteAtIndex(int index) {
+
+        if (index == 0) {
+            head = head.next;
+            if (head != null) {
+                head.prev = null;
+            }
+            if (head == null) {
+                tail = null;
+            }
+        }
+        else {
+
+            Node currentNode = head;
+            int currentIndex = 0;
+
+            while (currentNode != null && currentIndex < index) {
+                currentNode = currentNode.next;
+                currentIndex++;
+            }
+
+            if (currentNode == null) {
+                System.out.println("Invalid index");
+                return;
+            }
+
+            if (currentNode == tail) {
+                tail = tail.prev;
+                tail.next = null;
+                return;
+            }
+
+            currentNode.prev.next = currentNode.next;
+            currentNode.next.prev = currentNode.prev;
+
+        }
+    }
+
+    static  void traverse() {
+        Node temp = head;
+
+        while (temp != null) {
+            System.out.println(temp.data);
+            temp = temp.next;
+        }
+
+        System.out.println("--------------------------------");
     }
 
 }
