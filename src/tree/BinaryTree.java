@@ -38,6 +38,12 @@ public class BinaryTree {
       insert(root, 2);
       insert(root, 4);
 
+      inorderTraversal(root);
+        System.out.println();
+      preorderTraversal(root);
+        System.out.println();
+        postorderTraversal(root);
+
     }
 
     static TreeNode insert(TreeNode node, int data) {
@@ -66,5 +72,43 @@ public class BinaryTree {
 
         return Math.max(leftHeight, rightHeight) + 1;
 
+    }
+
+    static void inorderTraversal(TreeNode node) {
+        // Root, Left, Right
+        if (node == null) {
+            return;
+        }
+
+        inorderTraversal(node.left);
+        System.out.print(node.data + " ");
+        inorderTraversal(node.right);
+    }
+
+    static void preorderTraversal(TreeNode node) {
+        // Root, Left, Right
+
+        if (node == null) {
+            return;
+        }
+
+        System.out.print(node.data + " ");
+        preorderTraversal(node.left);
+        preorderTraversal(node.right);
+
+    }
+
+
+    private static void postorderTraversal(TreeNode node) {
+
+        // Left, Right, Root
+
+        if (node == null) {
+            return;
+        }
+
+        postorderTraversal(node.left);
+        postorderTraversal(node.right);
+        System.out.print(node.data + " ");
     }
 }
