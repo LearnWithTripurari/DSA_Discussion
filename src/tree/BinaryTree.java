@@ -39,11 +39,17 @@ public class BinaryTree {
       insert(root, 4);
 
       inorderTraversal(root);
-        System.out.println();
-      preorderTraversal(root);
-        System.out.println();
-        postorderTraversal(root);
+        System.out.println(" inorder ");
 
+      preorderTraversal(root);
+        System.out.println(" preorder ");
+
+        postorderTraversal(root);
+        System.out.println(" postorder");
+
+        delete(root, 2);
+        System.out.println("After deletion");
+        inorderTraversal(root);
     }
 
     static TreeNode insert(TreeNode node, int data) {
@@ -98,7 +104,6 @@ public class BinaryTree {
 
     }
 
-
     private static void postorderTraversal(TreeNode node) {
 
         // Left, Right, Root
@@ -110,5 +115,30 @@ public class BinaryTree {
         postorderTraversal(node.left);
         postorderTraversal(node.right);
         System.out.print(node.data + " ");
+    }
+
+    static TreeNode delete(TreeNode node, int data) {
+
+        if (node == null) {
+            return node;
+        }
+
+        if (data < node.data) {
+            node.left = delete(node.left, data);
+        }
+        else if (data > node.data) {
+            node.right = delete(node.right, data);
+        }
+        else {
+
+            if (node.left == null) {
+                return node.right;
+            }
+            else if (node.right == null) {
+                return node.left;
+            }
+        }
+
+        return node;
     }
 }
