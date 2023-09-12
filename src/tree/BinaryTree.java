@@ -32,11 +32,18 @@ public class BinaryTree {
 //
 //      System.out.println("Height of the Tree " + height(root));
 
-      root = insert(root, 5);
+      root = insert(root, 8);
       insert(root, 3);
-      insert(root, 8);
-      insert(root, 2);
+      insert(root, 10);
+      insert(root, 1);
+      insert(root, 6);
+      insert(root, 14);
       insert(root, 4);
+      insert(root, 7);
+      insert(root, 13);
+
+//        System.out.println(minValue(root.left.right));
+
 
       inorderTraversal(root);
         System.out.println(" inorder ");
@@ -47,7 +54,7 @@ public class BinaryTree {
         postorderTraversal(root);
         System.out.println(" postorder");
 
-        delete(root, 2);
+        delete(root, 3);
         System.out.println("After deletion");
         inorderTraversal(root);
     }
@@ -119,6 +126,7 @@ public class BinaryTree {
 
     static TreeNode delete(TreeNode node, int data) {
 
+        // Base case
         if (node == null) {
             return node;
         }
@@ -131,14 +139,40 @@ public class BinaryTree {
         }
         else {
 
+            // case 1 - when leaf node - a node doesn't have any child
+
+            if (node.left == null && node.right == null) {
+                return null;
+            }
+
+            // case 2 - when node has a child
+
             if (node.left == null) {
                 return node.right;
             }
             else if (node.right == null) {
                 return node.left;
             }
+
+            // case 3 - a node have both children which left and right
+
+            node.data = minValue(node.right);
+
+            node.right = delete(node.right, node.data);
+
         }
 
         return node;
+    }
+
+    private static int minValue(TreeNode node) {
+        // inorder successor
+        TreeNode temp = node;
+
+        while (temp.left != null) {
+            temp = temp.left;
+        }
+
+        return temp.data;
     }
 }
